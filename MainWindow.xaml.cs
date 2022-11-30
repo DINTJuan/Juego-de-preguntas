@@ -20,9 +20,12 @@ namespace Juego_de_preguntas
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainWindowVM vm = new MainWindowVM();
+
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = (object)this.vm;
         }
     }
 }
