@@ -49,10 +49,19 @@ namespace Juego_de_preguntas
             difi.Add("Normal");
             difi.Add("Dificil");
             this.dificultades = difi;
+            Iniciar();
+        }
 
+        private void Iniciar()
+        {
             PreguntaCreada = new Pregunta();
             PreguntaCreada.Dificultad = "Normal";
             PreguntaCreada.Categoria = "Ciencia y Naturaleza";
+        }
+
+        public void Limpiar()
+        {
+            Iniciar();
         }
 
 

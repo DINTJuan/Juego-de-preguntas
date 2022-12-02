@@ -21,11 +21,22 @@ namespace Juego_de_preguntas
     public partial class MainWindow : Window
     {
         private MainWindowVM vm = new MainWindowVM();
+        private Dialogo diag = new Dialogo();
 
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = (object)this.vm;
+        }
+
+        private void LimpiarButton_Click(object sender, RoutedEventArgs e)
+        {
+            vm.Limpiar();
+        }
+
+        private void ExaminarButton_Click(object sender, RoutedEventArgs e)
+        {
+            diag.MostrarDialog();
         }
     }
 }
