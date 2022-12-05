@@ -14,15 +14,15 @@ namespace Juego_de_preguntas
         public JSon()
         {
         }
-        public void Escribir(ObservableCollection<Pregunta> preguntas)
+        public void Escribir(ObservableCollection<Pregunta> preguntas,string ruta)
         {
             string personasJson = JsonConvert.SerializeObject(preguntas);
-            File.WriteAllText("personas.json", personasJson);
+            File.WriteAllText(ruta, personasJson);
         }
 
-        public ObservableCollection<Pregunta> Leer()
+        public ObservableCollection<Pregunta> Leer(string ruta)
         {
-            string personasJson = File.ReadAllText("personas.json");
+            string personasJson = File.ReadAllText(ruta);
             ObservableCollection<Pregunta> preguntas = JsonConvert.DeserializeObject<ObservableCollection<Pregunta>>(personasJson);
             return preguntas;
         }

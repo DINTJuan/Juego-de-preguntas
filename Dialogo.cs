@@ -29,6 +29,10 @@ namespace Juego_de_preguntas
             string urlImagen = azu.SubirFoto(openFileDialog.FileName);
             return urlImagen;
         }
+        public string SacraRuta()
+        {
+            return openFileDialog.FileName;
+        }
 
     }
 }

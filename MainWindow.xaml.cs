@@ -22,6 +22,7 @@ namespace Juego_de_preguntas
     {
         private MainWindowVM vm = new MainWindowVM();
         private Dialogo diag = new Dialogo();
+        private SaveDialog sav = new SaveDialog();
 
         public MainWindow()
         {
@@ -43,6 +44,23 @@ namespace Juego_de_preguntas
         private void AñadirButton_Click(object sender, RoutedEventArgs e)
         {
             vm.Añadir();
+        }
+
+        private void EliminarButton_Click(object sender, RoutedEventArgs e)
+        {
+            vm.Eliminar();
+        }
+
+        private void GuardarButton_Click(object sender, RoutedEventArgs e)
+        {
+            sav.MostrarDialog();
+            vm.Guardar(sav.SacarRuta());
+        }
+
+        private void CargarButton_Click(object sender, RoutedEventArgs e)
+        {
+            diag.MostrarDialog();
+            vm.Cargar(diag.SacraRuta());
         }
     }
 }

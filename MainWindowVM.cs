@@ -12,6 +12,7 @@ namespace Juego_de_preguntas
     class MainWindowVM : ObservableObject
     {
         private Pregunta preguntaCreada;
+        private Pregunta preguntaSelecionada;
         private ObservableCollection<Pregunta> preguntas;
         private JSon js = new JSon();
 
@@ -19,6 +20,17 @@ namespace Juego_de_preguntas
         {
             get { return preguntaCreada; }
             set { SetProperty(ref preguntaCreada, value); }
+        }
+        public ObservableCollection<Pregunta> Preguntas
+        {
+            get { return preguntas; }
+            set { SetProperty(ref preguntas, value); }
+        }
+
+        public Pregunta PreguntaSelecionada
+        {
+            get { return preguntaSelecionada; }
+            set { SetProperty(ref preguntaSelecionada, value); }
         }
 
         private ObservableCollection<string> categorias;
@@ -51,7 +63,7 @@ namespace Juego_de_preguntas
             difi.Add("Normal");
             difi.Add("Dificil");
             this.dificultades = difi;
-            this.preguntas = new ObservableCollection<Pregunta>();
+            this.Preguntas = new ObservableCollection<Pregunta>();
             Iniciar();
         }
 
@@ -69,18 +81,22 @@ namespace Juego_de_preguntas
 
         public void Añadir()
         {
-            preguntas.Add(PreguntaCreada);
+            Preguntas.Add(PreguntaCreada);
             Limpiar();
         }
 
-        public void Guardar()
+        public void Guardar(string ruta)
         {
-            js.Escribir(preguntas);
+            js.Escribir(preguntas,ruta);
         }
 
-        public void Cargar()
+        public void Cargar(string ruta)
         {
-            preguntas = js.Leer();
+            Preguntas = js.Leer(ruta);
+        }
+        public void Eliminar()
+        {
+            Preguntas.Remove(PreguntaSelecionada);
         }
 
 
