@@ -37,6 +37,12 @@ namespace Juego_de_preguntas
         private void ExaminarButton_Click(object sender, RoutedEventArgs e)
         {
             diag.MostrarDialog();
+            TextBoxImagen.Text = diag.SacarUrl();
+        }
+
+        private void AñadirButton_Click(object sender, RoutedEventArgs e)
+        {
+            vm.Añadir();
         }
     }
 }

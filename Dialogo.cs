@@ -1,6 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using Azure.Storage.Blobs;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +22,12 @@ namespace Juego_de_preguntas
         {
             openFileDialog = new OpenFileDialog();
             openFileDialog.ShowDialog();
+        }
+        public string SacarUrl()
+        {
+            Azure azu = new Azure();
+            string urlImagen = azu.SubirFoto(openFileDialog.FileName);
+            return urlImagen;
         }
 
     }
