@@ -38,7 +38,7 @@ namespace Juego_de_preguntas
         private void ExaminarButton_Click(object sender, RoutedEventArgs e)
         {
             diag.MostrarDialog();
-            TextBoxImagen.Text = diag.SacarUrl();
+            vm.AñadirImagen(diag.SacarUrl());
         }
 
         private void AñadirButton_Click(object sender, RoutedEventArgs e)
@@ -61,6 +61,17 @@ namespace Juego_de_preguntas
         {
             diag.MostrarDialog();
             vm.Cargar(diag.SacraRuta());
+        }
+
+        private void ExaminarEditar_Click(object sender, RoutedEventArgs e)
+        {
+            diag.MostrarDialog();
+            vm.EditarImagen(diag.SacraRuta());
+        }
+
+        private void NuevaButton_Click(object sender, RoutedEventArgs e)
+        {
+            vm.CrearListasPartida();
         }
     }
 }

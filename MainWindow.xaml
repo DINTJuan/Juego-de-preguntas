@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Preguntas" Height="450" Width="800" MinHeight="700" MinWidth="900">
     <Window.Resources>
+        <local:ConvertidorPista x:Key="conversor"/>
         <Style x:Key="tipoCategoria" TargetType="{x:Type StackPanel}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Style.Triggers>
@@ -81,14 +82,14 @@
                         </Grid.RowDefinitions>
                         <Image Grid.Column="0" Grid.Row="0" Margin="10,0,0,0" Width="20" Height="20" HorizontalAlignment="Left"></Image>
                         <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left">Categoria</TextBlock>
-                        <Image Grid.Column="0" Grid.Row="2"></Image>
-                        <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left">¿Texto pregunta?</TextBlock>
+                        <Image Grid.Column="0" Grid.Row="2" Source="{Binding PreguntaJugada.Imagen}"></Image>
+                        <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" Text="{Binding PreguntaJugada.PreguntaF}"></TextBlock>
                         <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left">Respuesta</TextBlock>
                         <StackPanel Grid.Column="0" Grid.Row="5" Orientation="Horizontal">
                             <TextBox x:Name="TextBoxRespuesta1" Width="300" Margin="10"></TextBox>
                             <Button Width="50">Validar</Button>
                         </StackPanel>
-                        <Expander x:Name="ExpanderPista" Grid.Column="0" Grid.Row="6" Header="Ver pista/Ocultar pista">Pista</Expander>
+                        <Expander x:Name="ExpanderPista" Grid.Column="0" Grid.Row="6" Header="Ver pista/Ocultar pista" Content="{Binding PreguntaJugada.Pista, Converter={StaticResource conversor}}"></Expander>
                         <GroupBox Header="Categorias con seguidas" Grid.Column="1" Grid.RowSpan="3">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -107,8 +108,8 @@
                         </GroupBox>
                         <TextBlock Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left">Dificultad</TextBlock>
                         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
-                            <Slider Width="200" Maximum="1" TickFrequency="1" IsSnapToTickEnabled="True"></Slider>
-                            <Button Margin="10,0,0,0">Nueva Partida</Button>
+                            <Slider Width="200" Maximum="1" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding Dificultad}"></Slider>
+                            <Button x:Name="NuevaButton" Margin="10,0,0,0" Click="NuevaButton_Click">Nueva Partida</Button>
                         </StackPanel>
                         
                     </Grid>
@@ -183,7 +184,7 @@
                             <Button x:Name="GuardarButton" Margin="5" Click="GuardarButton_Click">Guardar de JSON</Button>
                             <Button x:Name="EliminarButton" Click="EliminarButton_Click" Margin="5">Eliminar pregunta</Button>
                         </StackPanel>
-                        <Button  Grid.Column="2" Grid.Row="3">Examinar</Button>
+                        <Button x:Name="ExaminarEditar"  Grid.Column="2" Grid.Row="3" Click="ExaminarEditar_Click">Examinar</Button>
                         <ListBox x:Name="PreListBox" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Path=Preguntas}" SelectedItem="{Binding Path=PreguntaSelecionada}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
