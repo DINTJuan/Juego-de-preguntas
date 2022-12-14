@@ -87,9 +87,9 @@
                         <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left">Respuesta</TextBlock>
                         <StackPanel Grid.Column="0" Grid.Row="5" Orientation="Horizontal">
                             <TextBox x:Name="TextBoxRespuesta1" Width="300" Margin="10"></TextBox>
-                            <Button Width="50">Validar</Button>
+                            <Button x:Name="ValidarButton" Width="50" Click="ValidarButton_Click">Validar</Button>
                         </StackPanel>
-                        <Expander x:Name="ExpanderPista" Grid.Column="0" Grid.Row="6" Header="Ver pista/Ocultar pista" Content="{Binding PreguntaJugada.Pista, Converter={StaticResource conversor}}"></Expander>
+                        <Expander x:Name="ExpanderPista" Grid.Column="0" Grid.Row="6" Header="Ver pista/Ocultar pista" Content="{Binding PreguntaJugada.Respuesta, Converter={StaticResource conversor}}"></Expander>
                         <GroupBox Header="Categorias con seguidas" Grid.Column="1" Grid.RowSpan="3">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -99,11 +99,14 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*"/>
                                     <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Grid.Row="0"></Image>
-                                <Image Grid.Column="1" Grid.Row="0"></Image>
-                                <Image Grid.Column="0" Grid.Row="1"></Image>
-                                <Image Grid.Column="1" Grid.Row="1"></Image>
+                                <Image x:Name="CienciaImagen" Grid.Column="0" Grid.Row="0" Source="Imagenes/ciencia.jpg" Visibility="Collapsed"></Image>
+                                <Image x:Name="HistoriaImagen" Grid.Column="1" Grid.Row="0" Source="Imagenes/historia.jpg" Visibility="Collapsed"></Image>
+                                <Image x:Name="GeografiaImagen" Grid.Column="0" Grid.Row="1" Source="Imagenes/geografia.jpg" Visibility="Collapsed"></Image>
+                                <Image x:Name="LiteraturaImagen" Grid.Column="1" Grid.Row="1" Source="Imagenes/literatura.png" Visibility="Collapsed"></Image>
+                                <Image x:Name="DeporteImagen" Grid.Column="0" Grid.Row="2" Source="Imagenes/deportes.jpg" Visibility="Collapsed"></Image>
+                                <Image x:Name="CineImagen" Grid.Column="1" Grid.Row="2" Source="Imagenes/cine.jpg" Visibility="Collapsed"></Image>
                             </Grid>
                         </GroupBox>
                         <TextBlock Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left">Dificultad</TextBlock>

@@ -73,5 +73,37 @@ namespace Juego_de_preguntas
         {
             vm.CrearListasPartida();
         }
+
+        private void ValidarButton_Click(object sender, RoutedEventArgs e)
+        {
+           string comprobar = vm.Validar(TextBoxRespuesta1.Text);
+            switch(comprobar)
+            {
+                case "Ciencia y Naturaleza":
+                    CienciaImagen.Visibility = Visibility.Visible;
+                break;
+                case "Historia":
+                    HistoriaImagen.Visibility = Visibility.Visible;
+                break;
+                case "Arte y Literatura":
+                    LiteraturaImagen.Visibility = Visibility.Visible;
+                break;
+                case "Geografía":
+                    GeografiaImagen.Visibility = Visibility.Visible;
+                break;
+                case "Deporte":
+                    DeporteImagen.Visibility = Visibility.Visible;
+                break;
+                case "Espectáculos":
+                    CineImagen.Visibility = Visibility.Visible;
+                break;
+                case "Ganado":
+                    //Añadir ganar
+                break;
+                case "Fallido":
+                    //Añadir fallar
+                break;
+            }
+        }
     }
 }

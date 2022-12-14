@@ -16,8 +16,15 @@ namespace Juego_de_preguntas
             string pista ="";
             for(int i=0; i<respuesta.Length;i++)
             {
-                if(i == 0 || i== respuesta.Length)
-                pista += respuesta[i];
+                if(i == 0 || i == respuesta.Length -1)
+                {
+                    pista += respuesta[i];
+                }
+                else
+                {
+                    pista += "*";
+                }
+                
             }
             return pista;
         }

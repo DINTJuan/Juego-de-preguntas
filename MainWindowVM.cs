@@ -147,9 +147,48 @@ namespace Juego_de_preguntas
                     }
                 }
             }
+            Random();
+        }
+
+        public void Random()
+        {
             Random random = new Random();
             int numero = random.Next(0, PreguntasPartida.Count());
             PreguntaJugada = PreguntasPartida[numero];
+        }
+
+        public string Validar(string respuestaJugador)
+        {
+            int contadorcateg = 0;
+            string categ = "";
+            if(PreguntaJugada.Respuesta == respuestaJugador)
+            {
+                ObservableCollection<Pregunta> preguntasEliminar = new ObservableCollection<Pregunta>();
+                foreach (Pregunta p in PreguntasPartida)
+                {
+                    if(PreguntaJugada.Categoria != p.Categoria)
+                    {
+                        preguntasEliminar.Add(p);
+                    }
+                }
+                categ = PreguntaJugada.Categoria;
+                PreguntasPartida = preguntasEliminar;
+                contadorcateg++;
+                if(contadorcateg != 6)
+                {
+                    Random();
+                }
+                else
+                {
+                    categ = "Ganado";
+                }
+                return categ;
+            }
+            else
+            {
+                Random();
+                return "Fallido";
+            }
         }
 
 
