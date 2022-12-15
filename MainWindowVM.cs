@@ -12,12 +12,13 @@ namespace Juego_de_preguntas
     class MainWindowVM : ObservableObject
     {
         private int dificultad;
+        public int contadorcateg = 0;
         private Pregunta preguntaCreada;
         private Pregunta preguntaSelecionada;
         private Pregunta preguntaJugada;
         private ObservableCollection<Pregunta> preguntas;
         private ObservableCollection<Pregunta> preguntasPartida;
-        private JSon js = new JSon();
+        private readonly JSon js = new JSon();
 
         public Pregunta PreguntaCreada
         {
@@ -67,6 +68,11 @@ namespace Juego_de_preguntas
         }
 
         public MainWindowVM()
+        {
+            Factorizar();
+        }
+
+        private void Factorizar()
         {
             ObservableCollection<string> catg = new ObservableCollection<string>();
             catg.Add("Ciencia y Naturaleza");
@@ -159,9 +165,8 @@ namespace Juego_de_preguntas
 
         public string Validar(string respuestaJugador)
         {
-            int contadorcateg = 0;
             string categ = "";
-            if(PreguntaJugada.Respuesta == respuestaJugador)
+            if(PreguntaJugada.Respuesta.ToLower() == respuestaJugador.ToLower())
             {
                 ObservableCollection<Pregunta> preguntasEliminar = new ObservableCollection<Pregunta>();
                 foreach (Pregunta p in PreguntasPartida)
@@ -181,6 +186,7 @@ namespace Juego_de_preguntas
                 else
                 {
                     categ = "Ganado";
+                    contadorcateg = 0;
                 }
                 return categ;
             }
@@ -189,6 +195,61 @@ namespace Juego_de_preguntas
                 Random();
                 return "Fallido";
             }
+        }
+
+        public bool ComprobarC2()
+        {
+            int contadorCatg = 0;
+            for (int i = 0; i < categorias.Count; i++)
+            {
+                if (ComprobarPreguntasDF(categorias[i]))
+                {
+                    contadorCatg++;
+                }
+            }
+            if(contadorCatg == 6)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        public bool ComprobarPreguntasDF(string catg)
+        {
+            bool facil = false;
+            bool dificil = false;
+            foreach(Pregunta p in Preguntas)
+            {
+                if(p.Categoria == catg)
+                {
+                    if(p.Dificultad == "Normal")
+                    {
+                        facil = true;
+                    }
+                    else
+                    {
+                        dificil = true;
+                    }
+                }
+            }
+            if(facil&&dificil)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void Ganado()
+        {
+            Factorizar();
+            PreguntaJugada = new Pregunta();
+            PreguntaSelecionada = new Pregunta();
         }
 
 

@@ -71,7 +71,26 @@ namespace Juego_de_preguntas
 
         private void NuevaButton_Click(object sender, RoutedEventArgs e)
         {
-            vm.CrearListasPartida();
+            if(vm.ComprobarC2())
+            {
+                LimpiarCatego();
+                vm.CrearListasPartida();
+                ValidarButton.IsEnabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Tiene que haber 1 pregunta en cada Categoria y dificultad (12)", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void LimpiarCatego()
+        {
+            CienciaImagen.Visibility = Visibility.Collapsed;
+            HistoriaImagen.Visibility = Visibility.Collapsed;
+            LiteraturaImagen.Visibility = Visibility.Collapsed;
+            GeografiaImagen.Visibility = Visibility.Collapsed;
+            DeporteImagen.Visibility = Visibility.Collapsed;
+            CineImagen.Visibility = Visibility.Collapsed;
         }
 
         private void ValidarButton_Click(object sender, RoutedEventArgs e)
@@ -81,29 +100,60 @@ namespace Juego_de_preguntas
             {
                 case "Ciencia y Naturaleza":
                     CienciaImagen.Visibility = Visibility.Visible;
+                    TextBoxRespuesta1.Text = "";
                 break;
                 case "Historia":
                     HistoriaImagen.Visibility = Visibility.Visible;
-                break;
+                    TextBoxRespuesta1.Text = "";
+                    break;
                 case "Arte y Literatura":
                     LiteraturaImagen.Visibility = Visibility.Visible;
-                break;
+                    TextBoxRespuesta1.Text = "";
+                    break;
                 case "Geografía":
                     GeografiaImagen.Visibility = Visibility.Visible;
-                break;
+                    TextBoxRespuesta1.Text = "";
+                    break;
                 case "Deporte":
                     DeporteImagen.Visibility = Visibility.Visible;
-                break;
+                    TextBoxRespuesta1.Text = "";
+                    break;
                 case "Espectáculos":
                     CineImagen.Visibility = Visibility.Visible;
-                break;
+                    TextBoxRespuesta1.Text = "";
+                    break;
                 case "Ganado":
-                    //Añadir ganar
-                break;
+                    vm.Ganado();
+                    ValidarButton.IsEnabled = false;
+                    TextBoxRespuesta1.Text = "";
+                    VisibilidadesOn();
+                    MessageBox.Show("Has ganado!!!", "Victoria", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    VisibilidadesOff();
+                    break;
                 case "Fallido":
-                    //Añadir fallar
-                break;
+                    MessageBox.Show("Has fallado vuelve a intentarlo (usa la pista si lo necesitas)", "Fallo", MessageBoxButton.OK, MessageBoxImage.Error);
+                    TextBoxRespuesta1.Text = "";
+                    break;
             }
+        }
+
+        private void VisibilidadesOn()
+        {
+            CienciaImagen.Visibility = Visibility.Visible;
+            HistoriaImagen.Visibility = Visibility.Visible;
+            GeografiaImagen.Visibility = Visibility.Visible;
+            LiteraturaImagen.Visibility = Visibility.Visible;
+            DeporteImagen.Visibility = Visibility.Visible;
+            CineImagen.Visibility = Visibility.Visible;
+        }
+        private void VisibilidadesOff()
+        {
+            CienciaImagen.Visibility = Visibility.Collapsed;
+            HistoriaImagen.Visibility = Visibility.Collapsed;
+            GeografiaImagen.Visibility = Visibility.Collapsed;
+            LiteraturaImagen.Visibility = Visibility.Collapsed;
+            DeporteImagen.Visibility = Visibility.Collapsed;
+            CineImagen.Visibility = Visibility.Collapsed;
         }
     }
 }

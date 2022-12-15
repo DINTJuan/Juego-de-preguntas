@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Juego_de_preguntas"
         mc:Ignorable="d"
-        Title="Preguntas" Height="450" Width="800" MinHeight="700" MinWidth="900">
+        Title="Preguntas" Height="450" Width="900" MinHeight="700" MinWidth="900">
     <Window.Resources>
         <local:ConvertidorPista x:Key="conversor"/>
         <Style x:Key="tipoCategoria" TargetType="{x:Type StackPanel}">
@@ -27,6 +27,29 @@
                     <Setter Property="Background" Value="Orange"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Categoria}" Value="Espectáculos">
+                    <Setter Property="Background" Value="Violet"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="tipoCateGrid" TargetType="{x:Type Grid}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=PreguntaJugada.Categoria}" Value="Ciencia y Naturaleza">
+                    <Setter Property="Background" Value="Green"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PreguntaJugada.Categoria}" Value="Historia">
+                    <Setter Property="Background" Value="Yellow"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PreguntaJugada.Categoria}" Value="Arte y Literatura">
+                    <Setter Property="Background" Value="Red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PreguntaJugada.Categoria}" Value="Geografía">
+                    <Setter Property="Background" Value="Blue"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PreguntaJugada.Categoria}" Value="Deporte">
+                    <Setter Property="Background" Value="Orange"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=PreguntaJugada.Categoria}" Value="Espectáculos">
                     <Setter Property="Background" Value="Violet"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -65,7 +88,7 @@
         <TabControl>
             <TabItem Header="Jugar">
                 <StackPanel>
-                    <Grid>
+                    <Grid Style="{StaticResource tipoCateGrid}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
@@ -87,7 +110,7 @@
                         <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left">Respuesta</TextBlock>
                         <StackPanel Grid.Column="0" Grid.Row="5" Orientation="Horizontal">
                             <TextBox x:Name="TextBoxRespuesta1" Width="300" Margin="10"></TextBox>
-                            <Button x:Name="ValidarButton" Width="50" Click="ValidarButton_Click">Validar</Button>
+                            <Button x:Name="ValidarButton" Width="50" Click="ValidarButton_Click" IsEnabled="False">Validar</Button>
                         </StackPanel>
                         <Expander x:Name="ExpanderPista" Grid.Column="0" Grid.Row="6" Header="Ver pista/Ocultar pista" Content="{Binding PreguntaJugada.Respuesta, Converter={StaticResource conversor}}"></Expander>
                         <GroupBox Header="Categorias con seguidas" Grid.Column="1" Grid.RowSpan="3">
@@ -114,13 +137,12 @@
                             <Slider Width="200" Maximum="1" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding Dificultad}"></Slider>
                             <Button x:Name="NuevaButton" Margin="10,0,0,0" Click="NuevaButton_Click">Nueva Partida</Button>
                         </StackPanel>
-                        
                     </Grid>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Añadir Pregunta" >
                 <StackPanel>
-                    <Grid>
+                    <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.8*"/>
                             <ColumnDefinition Width="3*"/>
@@ -152,6 +174,7 @@
                         </StackPanel>
                         <Button x:Name="ExaminarButton" Grid.Column="2" Grid.Row="3" Click="ExaminarButton_Click">Examinar</Button>
                     </Grid>
+                    
                 </StackPanel>
             </TabItem>
             <TabItem Header="Gestionar Pregunta">
@@ -178,9 +201,9 @@
                         <TextBox x:Name="TextBoxRespuestaG" Text="{Binding PreguntaSelecionada.Respuesta}" Grid.Column="1" Grid.Row="2"></TextBox>
                         <TextBox x:Name="TextBoxImagenG" Text="{Binding PreguntaSelecionada.Imagen}" Grid.Column="1" Grid.Row="3" IsEnabled="False"></TextBox>
                         <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
-                            <ComboBox x:Name="ComboBoxNivelG" ItemsSource="{Binding Path=Dificultades}" SelectedItem="{Binding Path=PreguntaSelecionada.Dificultad}"></ComboBox>
+                            <ComboBox VerticalContentAlignment="Center" x:Name="ComboBoxNivelG" ItemsSource="{Binding Path=Dificultades}" SelectedItem="{Binding Path=PreguntaSelecionada.Dificultad}"></ComboBox>
                             <TextBlock Margin="100,0,0,0" VerticalAlignment="Center">Categoria</TextBlock>
-                            <ComboBox x:Name="ComboBoxCategoriasG" Margin="10,0,0,0" ItemsSource="{Binding Path=Categorias}" SelectedItem="{Binding Path=PreguntaSelecionada.Categoria}"></ComboBox>
+                            <ComboBox VerticalContentAlignment="Center" x:Name="ComboBoxCategoriasG" Margin="10,0,0,0" ItemsSource="{Binding Path=Categorias}" SelectedItem="{Binding Path=PreguntaSelecionada.Categoria}"></ComboBox>
                         </StackPanel>
                         <StackPanel Grid.Column="3" Grid.Row="0" Orientation="Vertical">
                             <Button x:Name="CargarButton" Margin="5" Click="CargarButton_Click">Cargar de JSON</Button>
@@ -188,7 +211,7 @@
                             <Button x:Name="EliminarButton" Click="EliminarButton_Click" Margin="5">Eliminar pregunta</Button>
                         </StackPanel>
                         <Button x:Name="ExaminarEditar"  Grid.Column="2" Grid.Row="3" Click="ExaminarEditar_Click">Examinar</Button>
-                        <ListBox x:Name="PreListBox" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Path=Preguntas}" SelectedItem="{Binding Path=PreguntaSelecionada}">
+                        <ListBox x:Name="PreListBox" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Path=Preguntas}" SelectedItem="{Binding Path=PreguntaSelecionada}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel/>
