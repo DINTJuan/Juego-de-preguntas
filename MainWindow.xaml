@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Juego_de_preguntas"
         mc:Ignorable="d"
-        Title="Preguntas" Height="450" Width="900" MinHeight="700" MinWidth="900">
+        Title="Preguntas" Height="450" Width="900" MinHeight="700" MinWidth="900" Icon="Imagenes\trivi.ico">
     <Window.Resources>
         <local:ConvertidorPista x:Key="conversor"/>
         <Style x:Key="tipoCategoria" TargetType="{x:Type StackPanel}">
@@ -44,7 +44,7 @@
                     <Setter Property="Background" Value="Red"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=PreguntaJugada.Categoria}" Value="Geografía">
-                    <Setter Property="Background" Value="Blue"/>
+                    <Setter Property="Background" Value="DeepSkyBlue"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=PreguntaJugada.Categoria}" Value="Deporte">
                     <Setter Property="Background" Value="Orange"/>
